@@ -11,14 +11,38 @@ public class PriceListServiceImpl implements PriceListService {
     @Autowired
     private PriceListRepository priceListRepository;
 
-    @Autowired
-    private PizzaService pizzaService;
-
     @Override
     public PriceList setPrice(Long pizzaId, double price) {
-        Long priceId = pizzaService.getPriceIdById(pizzaId);
-        PriceList priceList = priceListRepository.findById(priceId).get();
-        priceList.setPrice(price);
-        return priceListRepository.save(priceList);
+        PriceList byPizzaId = priceListRepository.findByPizzaId(pizzaId);
+        byPizzaId.setPrice(price);
+        return priceListRepository.save(byPizzaId);
+    }
+
+    @Override
+    public void delete(Long priceId) {
+        priceListRepository.deleteById(priceId);
+    }
+
+    @Override
+    public void delete(PriceList priceList) {
+        priceListRepository.delete(priceList);
+    }
+
+    @Override
+    public PriceList editDiscount(Long pizzaId, Double discount) {
+        PriceList byPizzaId = priceListRepository.findByPizzaId(pizzaId);
+        byPizzaId.setDiscountForClients(discount);
+        return priceListRepository.save(byPizzaId);
+    }
+
+    @Override
+    public Double getDiscountedPrice(Long pizzaId) {
+        PriceList byPizzaId = priceListRepository.findByPizzaId(pizzaId);
+        Double discount = byPizzaId.getDiscountForClients();
+        Double price = byPizzaId.getPrice();
+        if(discount != null && discount > 0) {
+            return price - (price * discount / 100);
+        }
+        return price;
     }
 }

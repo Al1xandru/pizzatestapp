@@ -11,19 +11,25 @@ public class PriceList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double price;
+    private Double price;
     private double discountForClients;
+
+    @OneToOne(mappedBy = "price", cascade = CascadeType.ALL)
+    private Pizza pizza;
+
+    @Column(name = "pizza_id", insertable = false, updatable = false)
+    private Long pizzaId;
 
     public PriceList() {
         //
     }
 
-    public PriceList(double price, double discountForClients) {
+    public PriceList(Double price, double discountForClients) {
         this.price = price;
         this.discountForClients = discountForClients;
     }
 
-    public PriceList(double price) {
+    public PriceList(Double price) {
         this.price = price;
     }
 
@@ -35,7 +41,7 @@ public class PriceList {
         this.id = id;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 

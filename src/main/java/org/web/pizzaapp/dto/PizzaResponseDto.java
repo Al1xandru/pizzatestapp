@@ -5,12 +5,12 @@ import org.web.pizzaapp.enums.PizzaSize;
 public class PizzaResponseDto {
 
     private Long id;
-    private double price;
+    private Double price;
     private String title;
     private PizzaSize size;
     private String description;
 
-    public PizzaResponseDto(Long id, double price, String title, PizzaSize size, String description) {
+    public PizzaResponseDto(Long id, Double price, String title, PizzaSize size, String description) {
         this.id = id;
         this.price = price;
         this.title = title;
@@ -26,7 +26,7 @@ public class PizzaResponseDto {
         this.id = id;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 

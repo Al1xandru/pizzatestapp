@@ -4,18 +4,18 @@ import org.web.pizzaapp.enums.PizzaSize;
 
 public class PizzaCreateDto {
 
-    private double price;
+    private Double price;
     private String title;
     private PizzaSize size;
     private String description;
 
-    public PizzaCreateDto(String description, PizzaSize size, double price) {
+    public PizzaCreateDto(String description, PizzaSize size, Double price) {
         this.description = description;
         this.size = size;
         this.price = price;
     }
 
-    public PizzaCreateDto(double price, String title, PizzaSize size, String description) {
+    public PizzaCreateDto(Double price, String title, PizzaSize size, String description) {
         this.price = price;
         this.title = title;
         this.size = size;
@@ -26,7 +26,7 @@ public class PizzaCreateDto {
         //
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 

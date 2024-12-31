@@ -34,7 +34,7 @@ public class PizzaServiceImpl implements PizzaService {
         Pizza currentPizza = getPizzaById(id);
         if(pizza.getDescription() != null){currentPizza.setDescription(pizza.getDescription());}
         if(pizza.getSize() != null){currentPizza.setSize(pizza.getSize());}
-        if(pizza.getPrice() != null){priceListService.setPrice(id, pizza.getPrice().getPrice());}
+        if(pizza.getPrice().getPrice() != null){priceListService.setPrice(id, pizza.getPrice().getPrice());}
         return repository.save(currentPizza);
     }
 
@@ -63,8 +63,4 @@ public class PizzaServiceImpl implements PizzaService {
         return getPizzaById(id).getDescription().toString();
     }
 
-    @Override
-    public Long getPriceIdById(Long id) {
-        return repository.getByIdPriceId(id);
-    }
 }

@@ -10,7 +10,4 @@ import org.web.pizzaapp.entity.Pizza;
 public interface PizzaRepository extends JpaRepository<Pizza, Long> {
 
     Pizza findByTitle(String title);
-
-    @Query("SELECT p.price FROM Pizza p WHERE p.id = :id")
-    Long getByIdPriceId(@Param("id")Long id);
 }

@@ -50,8 +50,8 @@ public class PizzaController {
         return createConverter.toDto(pizzaService.getPizzaByName(name));
     }
 
-    @PutMapping("/{id}")
-    public PizzaResponseDto edit(@PathVariable Long id, @RequestParam String description, @RequestParam PizzaSize pizzaSize, @RequestParam double price){
+    @PutMapping ("/{id}")
+    public PizzaResponseDto edit(@PathVariable Long id, @RequestParam(required = false) String description, @RequestParam(required = false) PizzaSize pizzaSize, @RequestParam(required = false) Double price){
         PizzaCreateDto pizzaCreateDto = new PizzaCreateDto(description, pizzaSize, price);
         Pizza pizza = pizzaService.edit(id, createConverter.toEntity(pizzaCreateDto));
         return createConverter.toDto(pizza);
