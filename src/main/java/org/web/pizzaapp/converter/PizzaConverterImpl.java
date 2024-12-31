@@ -1,14 +1,13 @@
 package org.web.pizzaapp.converter;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.web.pizzaapp.dto.PizzaCreateDto;
 import org.web.pizzaapp.dto.PizzaResponseDto;
 import org.web.pizzaapp.entity.Pizza;
 import org.web.pizzaapp.entity.PriceList;
 
 @Component
-public class PizzaConverterImpl implements PizzaConverter<Pizza, PizzaCreateDto, PizzaResponseDto> {
+public class PizzaConverterImpl implements Converter<Pizza, PizzaCreateDto, PizzaResponseDto> {
 
     @Override
     public PizzaResponseDto toDto(Pizza pizza) {
@@ -18,5 +17,10 @@ public class PizzaConverterImpl implements PizzaConverter<Pizza, PizzaCreateDto,
     @Override
     public Pizza toEntity(PizzaCreateDto pizzaCreateDto) {
         return new Pizza(new PriceList(pizzaCreateDto.getPrice()), pizzaCreateDto.getTitle(), pizzaCreateDto.getSize(), pizzaCreateDto.getDescription());
+    }
+
+    @Override
+    public PizzaResponseDto toDto(Pizza pizza, String roleAuthority) {
+        return null;
     }
 }

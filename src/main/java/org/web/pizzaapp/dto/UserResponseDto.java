@@ -1,44 +1,34 @@
-package org.web.pizzaapp.entity;
+package org.web.pizzaapp.dto;
 
-import jakarta.persistence.*;
-import org.web.pizzaapp.enums.Role;
+import org.web.pizzaapp.entity.DeliveryAddress;
+import org.web.pizzaapp.entity.Wallet;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "pizzaapp_users")
-public class User {
+public class UserResponseDto {
 
-    @Id // данное поле является первичным ключом
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // авто увеличение поля
     private Long id;
-
     private String email;
     private String login;
     private String password;
     private String name;
     private String surname;
-
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "wallet_id", referencedColumnName = "id")
     private Wallet wallet;
+    private List<DeliveryAddress> addresses;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private List<DeliveryAddress> addresses = new ArrayList<>();
-
-    @Enumerated(EnumType.STRING)
-    private Role role = Role.ROLE_USER;
-
-    public User() {
-        //
-    }
-
-    public User(String email, String login, String password, String name, String surname) {
+    public UserResponseDto(Long id, String email, String login, String password, String name, String surname, Wallet wallet, List<DeliveryAddress> addresses) {
+        this.id = id;
         this.email = email;
         this.login = login;
         this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.wallet = wallet;
+        this.addresses = addresses;
+    }
+
+    public UserResponseDto(String email, String name, String surname) {
+        this.email = email;
         this.name = name;
         this.surname = surname;
     }
@@ -105,13 +95,5 @@ public class User {
 
     public void setAddresses(List<DeliveryAddress> addresses) {
         this.addresses = addresses;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }

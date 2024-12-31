@@ -2,12 +2,11 @@ package org.web.pizzaapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.web.pizzaapp.converter.PizzaConverter;
+import org.web.pizzaapp.converter.Converter;
 import org.web.pizzaapp.dto.PizzaCreateDto;
 import org.web.pizzaapp.dto.PizzaResponseDto;
 import org.web.pizzaapp.entity.Pizza;
 import org.web.pizzaapp.enums.PizzaSize;
-import org.web.pizzaapp.repository.PizzaRepository;
 import org.web.pizzaapp.service.PizzaService;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public class PizzaController {
     private PizzaService pizzaService;
 
     @Autowired
-    private PizzaConverter<Pizza, PizzaCreateDto, PizzaResponseDto> createConverter;
+    private Converter<Pizza, PizzaCreateDto, PizzaResponseDto> createConverter;
 
     @PostMapping
     public PizzaResponseDto create(@RequestBody PizzaCreateDto pizzaCreateDto) {
