@@ -13,6 +13,9 @@ import java.util.List;
 public class PizzeriaServiceImpl implements PizzeriaService {
 
     @Autowired
+    private PizzaService pizzaService;
+
+    @Autowired
     private PizzeriaRepository repository;
 
     @Override
@@ -35,6 +38,19 @@ public class PizzeriaServiceImpl implements PizzeriaService {
         Pizzeria pizzeria = getByTitleCheckt(title);
         pizzeria.addPizza(pizza);
         return repository.save(pizzeria);
+    }
+
+    @Override
+    public Pizzeria addPizzaToPizzeria(Long pizzaId, String pizzeriatTitle) {
+        Pizza pizza = pizzaService.getPizzaById(pizzaId);
+        return addPizzaToPizzeria(pizza, pizzeriatTitle);
+    }
+
+    @Override
+    public void deletePizzaFromPizzeria(Long pizzaId, String pizzeriaTitle) {
+        Pizzeria pizzeria = getByTitleCheckt(pizzeriaTitle);
+        pizzeria.deletePizza(pizzaService.getPizzaById(pizzaId));
+        repository.save(pizzeria);
     }
 
     @Override

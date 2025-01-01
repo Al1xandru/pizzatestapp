@@ -16,5 +16,6 @@ public interface PizzeriaService {
     List<Pizzeria> getAllPizzeria();
     List<Pizza> getAllPizzasByPizzeriaTitle(String title);
     Pizzeria editWorkTime(String workTime, String title);
-
+    Pizzeria addPizzaToPizzeria(Long pizzaId, String pizzeriatTitle);
+    void deletePizzaFromPizzeria(Long pizzaId, String pizzeriaTitle);
 }

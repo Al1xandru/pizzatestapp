@@ -11,18 +11,18 @@ public class PizzeriaResponseDto {
     private String city;
     private String address;
     private String workTime;
-    private List<Pizza> pizzas;
+    private List<PizzaLiteResponseDto> pizzasLite;
 
     public PizzeriaResponseDto() {
     }
 
-    public PizzeriaResponseDto(Long id, String title, String city, String address, String workTime, List<Pizza> pizzas) {
+    public PizzeriaResponseDto(Long id, String title, String city, String address, String workTime, List<PizzaLiteResponseDto> pizzasLite) {
         this.id = id;
         this.title = title;
         this.city = city;
         this.address = address;
         this.workTime = workTime;
-        this.pizzas = pizzas;
+        this.pizzasLite = pizzasLite;
     }
 
     public Long getId() {
@@ -57,19 +57,19 @@ public class PizzeriaResponseDto {
         this.address = address;
     }
 
-    public List<Pizza> getPizzas() {
-        return pizzas;
-    }
-
-    public void setPizzas(List<Pizza> pizzas) {
-        this.pizzas = pizzas;
-    }
-
     public String getWorkTime() {
         return workTime;
     }
 
     public void setWorkTime(String workTime) {
         this.workTime = workTime;
+    }
+
+    public List<PizzaLiteResponseDto> getPizzasLite() {
+        return pizzasLite;
+    }
+
+    public void setPizzasLite(List<PizzaLiteResponseDto> pizzasLite) {
+        this.pizzasLite = pizzasLite;
     }
 }

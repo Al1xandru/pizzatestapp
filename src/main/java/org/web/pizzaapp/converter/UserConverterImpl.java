@@ -1,8 +1,10 @@
 package org.web.pizzaapp.converter;
 
 import org.springframework.stereotype.Component;
+import org.web.pizzaapp.dto.PizzaLiteResponseDto;
 import org.web.pizzaapp.dto.UserCreateDto;
 import org.web.pizzaapp.dto.UserResponseDto;
+import org.web.pizzaapp.entity.Pizza;
 import org.web.pizzaapp.entity.User;
 
 @Component
@@ -31,6 +33,11 @@ public class UserConverterImpl implements Converter<User, UserCreateDto, UserRes
                     user.getSurname()
             );
         }
+    }
+
+    @Override
+    public PizzaLiteResponseDto toLiteDto(Pizza pizza) {
+        return null;
     }
 
     @Override

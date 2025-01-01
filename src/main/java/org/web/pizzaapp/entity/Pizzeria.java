@@ -35,6 +35,10 @@ public class Pizzeria {
         this.pizzas.add(pizza);
     }
 
+    public void deletePizza(Pizza pizza) {
+        this.pizzas.remove(pizza);
+    }
+
     public Long getId() {
         return id;
     }

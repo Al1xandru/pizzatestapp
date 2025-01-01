@@ -39,9 +39,14 @@ public class PizzeriaController {
         return converter.toDto(service.add(converter.toEntity(dto)));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id){
         service.deleteById(id);
+    }
+
+    @DeleteMapping("/pizza")
+    public void deletePizzaFromPizzeria(@RequestParam Long pizzaId, @RequestParam String pizzeeriaTitle){
+        service.deletePizzaFromPizzeria(pizzaId, pizzeeriaTitle);
     }
 
     @PutMapping
@@ -50,8 +55,13 @@ public class PizzeriaController {
     }
 
     @PutMapping("/addPizza")
-    public PizzeriaResponseDto addPizza(@PathVariable String title, @RequestBody PizzaCreateDto dto){
+    public PizzeriaResponseDto addPizza(@RequestParam String title, @RequestBody PizzaCreateDto dto){
         return converter.toDto(service.addPizzaToPizzeria(pizzaConverter.toEntity(dto), title));
+    }
+
+    @PutMapping("/addPizzaById")
+    public PizzeriaResponseDto addPizza(@RequestParam String title, @RequestParam Long pizzaId){
+        return converter.toDto(service.addPizzaToPizzeria(pizzaId, title));
     }
 
 }

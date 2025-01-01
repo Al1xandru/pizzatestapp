@@ -2,6 +2,7 @@ package org.web.pizzaapp.converter;
 
 import org.springframework.stereotype.Component;
 import org.web.pizzaapp.dto.PizzaCreateDto;
+import org.web.pizzaapp.dto.PizzaLiteResponseDto;
 import org.web.pizzaapp.dto.PizzaResponseDto;
 import org.web.pizzaapp.entity.Pizza;
 import org.web.pizzaapp.entity.PriceList;
@@ -12,6 +13,11 @@ public class PizzaConverterImpl implements Converter<Pizza, PizzaCreateDto, Pizz
     @Override
     public PizzaResponseDto toDto(Pizza pizza) {
         return new PizzaResponseDto(pizza.getId(), pizza.getPrice().getPrice(), pizza.getTitle(), pizza.getSize(), pizza.getDescription());
+    }
+
+    @Override
+    public PizzaLiteResponseDto toLiteDto(Pizza pizza){
+        return new PizzaLiteResponseDto(pizza.getTitle(), pizza.getPrice().getPrice());
     }
 
     @Override
