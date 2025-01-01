@@ -24,6 +24,10 @@ public class Pizzeria {
     public Pizzeria() {
     }
 
+    public void addPizza(Pizza pizza) {
+        this.pizzas.add(pizza);
+    }
+
     public Long getId() {
         return id;
     }
@@ -71,4 +75,5 @@ public class Pizzeria {
     public void setPizzas(List<Pizza> pizzas) {
         this.pizzas = pizzas;
     }
+
 }

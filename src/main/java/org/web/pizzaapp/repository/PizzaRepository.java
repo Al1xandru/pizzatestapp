@@ -6,8 +6,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.web.pizzaapp.entity.Pizza;
 
+import java.util.Optional;
+
 @Repository
 public interface PizzaRepository extends JpaRepository<Pizza, Long> {
 
-    Pizza findByTitle(String title);
+    Optional<Pizza> findByTitle(String title);
 }

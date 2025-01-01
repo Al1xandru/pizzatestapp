@@ -26,7 +26,7 @@ public class PizzaServiceImpl implements PizzaService {
 
     @Override
     public Pizza getPizzaByName(String title) {
-        return repository.findByTitle(title);
+        return repository.findByTitle(title).orElseThrow(() -> new PizzaNotFoundException("Pizza with title " + title + " not found"));
     }
 
     @Override
