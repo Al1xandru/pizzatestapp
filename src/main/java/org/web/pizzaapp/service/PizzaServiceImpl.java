@@ -9,6 +9,7 @@ import org.web.pizzaapp.exception.PizzaNotFoundException;
 import org.web.pizzaapp.repository.PizzaRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,7 +31,16 @@ public class PizzaServiceImpl implements PizzaService {
 
     @Override
     public Pizza getPizzaByName(String title) {
-        return repository.findByTitle(title).orElseThrow(() -> new PizzaNotFoundException("Pizza with title " + title + " not found"));
+        Pizza pizza = repository.findByTitle(title)
+                .orElseThrow(() -> new PizzaNotFoundException("Pizza with title " + title + " not found"));
+        return getPizzaWithChecktPrice(pizza);
+    }
+
+    @Override
+    public Pizza getPizzaById(Long id) {
+        Pizza pizza = repository.findById(id)
+                .orElseThrow(() -> new PizzaNotFoundException("Pizza with id " + id + " not found"));
+        return getPizzaWithChecktPrice(pizza);
     }
 
     @Override
@@ -51,19 +61,10 @@ public class PizzaServiceImpl implements PizzaService {
     public List<Pizza> getAllPizzas() {
         if(userService.getAuthenticatedStatus()) {
             return repository.findAll().stream()
-                    .map(p -> {
-                        Double discountedPrice = priceListService.getDiscountedPrice(p.getId());
-                        p.getPrice().setPrice(discountedPrice);
-                        return p;
-                    })
+                    .map(this::getPizzaWithChecktPrice)
                     .collect(Collectors.toList());
         }
         return repository.findAll();
-    }
-
-    @Override
-    public Pizza getPizzaById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new PizzaNotFoundException("Pizza with id " + id + " not found"));
     }
 
     @Override
@@ -76,4 +77,13 @@ public class PizzaServiceImpl implements PizzaService {
         return getPizzaById(id).getDescription().toString();
     }
 
+    @Override
+    public Pizza getPizzaWithChecktPrice(Pizza pizza) {
+        if(userService.getAuthenticatedStatus()){
+            Double discountedPrice = priceListService.getDiscountedPrice(pizza.getId());
+            pizza.getPrice().setPrice(discountedPrice);
+            return pizza;
+        }
+        return pizza;
+    }
 }

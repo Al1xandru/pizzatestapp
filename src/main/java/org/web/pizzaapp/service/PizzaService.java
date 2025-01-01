@@ -15,4 +15,5 @@ public interface PizzaService {
     String getPizzaNameById(Long id);
     String getPizzaDescriptionById(Long id);
     Pizza getPizzaByName(String pizzaName);
+    Pizza getPizzaWithChecktPrice(Pizza pizza);
 }
