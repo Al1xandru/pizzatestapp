@@ -14,4 +14,5 @@ public interface UserService {
     String getCurrentLogin();
     Long getCurrentUserId();
     String getCurrentUserRole();
+    Boolean getAuthenticatedStatus();
 }

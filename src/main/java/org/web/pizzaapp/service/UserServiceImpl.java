@@ -1,6 +1,7 @@
 package org.web.pizzaapp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,14 @@ public class UserServiceImpl implements UserService {
             return authentication.getName();
         }
         return null;
+    }
+
+    @Override
+    public Boolean getAuthenticatedStatus() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication != null &&
+                !(authentication instanceof AnonymousAuthenticationToken) &&
+                authentication.isAuthenticated();
     }
 
     @Override

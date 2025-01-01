@@ -9,6 +9,7 @@ import org.web.pizzaapp.exception.PizzaNotFoundException;
 import org.web.pizzaapp.repository.PizzaRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PizzaServiceImpl implements PizzaService {
@@ -18,6 +19,9 @@ public class PizzaServiceImpl implements PizzaService {
 
     @Autowired
     private PriceListService priceListService;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public Pizza add(Pizza pizza) {
@@ -45,6 +49,15 @@ public class PizzaServiceImpl implements PizzaService {
 
     @Override
     public List<Pizza> getAllPizzas() {
+        if(userService.getAuthenticatedStatus()) {
+            return repository.findAll().stream()
+                    .map(p -> {
+                        Double discountedPrice = priceListService.getDiscountedPrice(p.getId());
+                        p.getPrice().setPrice(discountedPrice);
+                        return p;
+                    })
+                    .collect(Collectors.toList());
+        }
         return repository.findAll();
     }
 
