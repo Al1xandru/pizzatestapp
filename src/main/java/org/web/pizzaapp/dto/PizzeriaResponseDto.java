@@ -1,38 +1,28 @@
-package org.web.pizzaapp.entity;
+package org.web.pizzaapp.dto;
 
-import jakarta.persistence.*;
+import org.web.pizzaapp.entity.Pizza;
 
 import java.util.List;
 
-@Entity
-@Table(name = "pizzeria")
-public class Pizzeria {
+public class PizzeriaResponseDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
     private String city;
     private String address;
     private String workTime;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pizzas_id", referencedColumnName = "id")
     private List<Pizza> pizzas;
 
-    public Pizzeria() {
+    public PizzeriaResponseDto() {
     }
 
-    public Pizzeria(String title, String city, String address, String workTime) {
+    public PizzeriaResponseDto(Long id, String title, String city, String address, String workTime, List<Pizza> pizzas) {
+        this.id = id;
         this.title = title;
         this.city = city;
         this.address = address;
         this.workTime = workTime;
-    }
-
-    public void addPizza(Pizza pizza) {
-        this.pizzas.add(pizza);
+        this.pizzas = pizzas;
     }
 
     public Long getId() {
@@ -67,14 +57,6 @@ public class Pizzeria {
         this.address = address;
     }
 
-    public String getWorkTime() {
-        return workTime;
-    }
-
-    public void setWorkTime(String workTime) {
-        this.workTime = workTime;
-    }
-
     public List<Pizza> getPizzas() {
         return pizzas;
     }
@@ -83,4 +65,11 @@ public class Pizzeria {
         this.pizzas = pizzas;
     }
 
+    public String getWorkTime() {
+        return workTime;
+    }
+
+    public void setWorkTime(String workTime) {
+        this.workTime = workTime;
+    }
 }

@@ -11,8 +11,10 @@ public interface PizzeriaService {
     Pizzeria add(Pizzeria pizzeria);
     Pizzeria edit(Pizzeria pizzeria);
     void delete(Pizzeria pizzeria);
+    void deleteById(Long id);
     Pizzeria addPizzaToPizzeria(Pizza pizza, String title);
     List<Pizzeria> getAllPizzeria();
     List<Pizza> getAllPizzasByPizzeriaTitle(String title);
+    Pizzeria editWorkTime(String workTime, String title);
 
 }
